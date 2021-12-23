@@ -2,6 +2,7 @@ var timeoutId = undefined;
 var count = 0;
 const createCount = (stopTime, publisher, key) => {
   clear();
+  console.log(stopTime);
   set(stopTime, publisher, key);
 }
 
@@ -10,6 +11,7 @@ const clear = () => {
 }
 
 const set = (stopTime, publisher, key) => {
+  console.log(stopTime);
   if (!stopTime) return;
   timeoutId = setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
