@@ -1,22 +1,22 @@
 var timeoutId = undefined;
 var count = 0;
-const createCount = (stopTime) => {
+const createCount = (stopTime, publisher, key) => {
   clear();
-  set(stopTime);
+  set(stopTime, publisher);
 }
 
 const clear = () => {
   clearInterval(timeoutId)
 }
 
-const set = (stopTime) => {
+const set = (stopTime, publisher, key) => {
   if (!stopTime) return;
   timeoutId = setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
       clear();
     }
-    console.log(convert(timeDiff));
+    publisher(convert(timeDiff), key);
     count++;
   }, 1000);
 }
