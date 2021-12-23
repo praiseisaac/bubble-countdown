@@ -2,7 +2,7 @@ var timeoutId = undefined;
 var count = 0;
 const createCount = (stopTime, publisher, key) => {
   clear();
-  set(stopTime, publisher);
+  set(stopTime, publisher, key);
 }
 
 const clear = () => {
