@@ -9,7 +9,7 @@ const clear = () => {
   clearInterval(timeoutId)
 }
 
-const set = (stopTime = "Thu Dec 23 2021 16:35:31 GMT-0500 (Eastern Standard Time)") => {
+const set = (stopTime) => {
   if (!stopTime) return;
   timeoutId = setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
