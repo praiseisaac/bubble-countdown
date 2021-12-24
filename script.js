@@ -23,7 +23,7 @@ const clear = ids => {
 const set = (stopTime, publisher, key, id) => {
   var count = 0;
   if (!stopTime) return;
-  return setInterval(async () => {
+  return setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
       clear(id)
