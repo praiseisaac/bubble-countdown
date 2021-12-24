@@ -16,6 +16,7 @@ const set = (stopTime, publisher, key, id) => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
       clear(id);
+      publisher(key, "00:00:00");
     }
     publisher(key, convert(timeDiff));
     count++;
