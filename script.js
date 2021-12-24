@@ -12,7 +12,7 @@ const startCount = (stopTime, publisher, key, id, timers) => {
 
 const clear = ids => {
   if (typeof ids === "string") {
-    clearInterval(timeouts[id]);
+    clearInterval(ids);
     return;
   }
   ids.map(id => {
