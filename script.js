@@ -5,8 +5,19 @@ const createCount = (stopTime, publisher, key, id) => {
   timeouts[id] = set(stopTime, publisher, key, id);
 }
 
-const clear = id => {
-  clearInterval(timeouts[id]);
+const startCount = (stopTime, publisher, key, id, timers) => {
+  clear(timers);
+  timeouts[id] = set(stopTime, publisher, key, id);
+}
+
+const clear = ids => {
+  if (typeof ids === "string") {
+    clearInterval(timeouts[ids]);
+    return;
+  }
+  ids.map(id => {
+    clearInterval(timeouts[id]);
+  });
 }
 
 const set = (stopTime, publisher, key, id) => {
