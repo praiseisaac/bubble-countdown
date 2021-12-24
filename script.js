@@ -17,8 +17,9 @@ const set = (stopTime, publisher, key, id) => {
     if (timeDiff <= 0) {
       clear(id);
       publisher(key, "00:00:00");
+    } else {
+      publisher(key, convert(timeDiff));
     }
-    publisher(key, convert(timeDiff));
     count++;
   }, 1000);
 }
