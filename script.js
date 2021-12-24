@@ -1,34 +1,38 @@
 const timeouts = {};
 
-const createCount = (stopTime, publisher, key, timers) => {
+const createCount = (stopTime, publisher, key, id) => {
+  clear(id);
+  timeouts[id] = set(stopTime, publisher, key, id);
+}
+
+const startCount = (stopTime, publisher, key, id, timers) => {
   clear(timers);
-  let intervalId = set(stopTime, publisher, key, timers);
-  return timeouts[intervalId];
+  timeouts[id] = set(stopTime, publisher, key, id);
 }
 
 const clear = ids => {
+  if (typeof ids === "string") {
+    clearInterval(timeouts[id]);
+    return;
+  }
   ids.map(id => {
     clearInterval(id);
   });
 }
 
-const set = (stopTime, publisher, key, timers) => {
+const set = (stopTime, publisher, key, id) => {
   var count = 0;
   if (!stopTime) return;
-  let id = setInterval(async () => {
+  return setInterval(async () => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
-      clearLoc();
+      clear(id)
       publisher(key, "00:00:00");
     } else {
       publisher(key, convert(timeDiff));
     }
     count++;
   }, 1000);
-  const clearLoc = () => {
-    clear([id]);
-  }
-  return id;
 }
 
 var convert = (seconds) => {
