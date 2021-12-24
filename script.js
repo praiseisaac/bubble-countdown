@@ -25,7 +25,6 @@ const set = (stopTime, publisher, key, id) => {
   if (!stopTime) return;
   return setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
-    console.log(timeouts[id], timeDiff);
     if (timeDiff <= 0 || !timeouts[id]) {
       clear(id);
       publisher(key, "00:00:00");
