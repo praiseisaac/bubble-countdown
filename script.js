@@ -2,12 +2,12 @@ const timeouts = {};
 
 const createCount = (stopTime, publisher, key, id) => {
   clear(id);
-  timeouts[id] = set(stopTime, publisher, key, id);
+  return set(stopTime, publisher, key, id);
 }
 
 const startCount = (stopTime, publisher, key, id, timers) => {
   clear(timers);
-  timeouts[id] = set(stopTime, publisher, key, id);
+  return set(stopTime, publisher, key, id);
 }
 
 const clear = ids => {
@@ -46,4 +46,3 @@ var convert = (seconds) => {
     .filter((val, ix) => val !== "00" || ix > 0)
     .join(":");
 }
-
