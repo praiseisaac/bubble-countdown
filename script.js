@@ -1,29 +1,25 @@
-var timeoutId = undefined;
-var count = 0;
+
 const createCount = (stopTime, publisher, key) => {
   clear();
   set(stopTime, publisher, key);
 }
 
-const clear = () => {
+const clear = timeoutId => {
   clearInterval(timeoutId)
 }
 
 const set = (stopTime, publisher, key) => {
+  let timeoutId = undefined;
+  let count = 0;
   if (!stopTime) return;
   timeoutId = setInterval(() => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
-      clear();
+      clear(timeoutId);
     }
     publisher(key, convert(timeDiff));
     count++;
   }, 1000);
-}
-
-const reset = () => {
-  clear();
-  set();
 }
 
 var convert = (seconds) => {
