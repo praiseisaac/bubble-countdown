@@ -1,9 +1,9 @@
 const timeouts = {};
 
-const createCount = (stopTime, publisher, key, id) => {
-  clear([id]);
-  timeouts[id] = set(stopTime, publisher, key, id);
-  return timeouts[id];
+const createCount = (stopTime, publisher, key, timers) => {
+  clear(timers);
+  let intervalId = set(stopTime, publisher, key, timers);
+  return timeouts[intervalId];
 }
 
 const clear = ids => {
@@ -12,19 +12,23 @@ const clear = ids => {
   });
 }
 
-const set = (stopTime, publisher, key, id) => {
+const set = (stopTime, publisher, key, timers) => {
   var count = 0;
   if (!stopTime) return;
-  return setInterval(async () => {
+  let id = setInterval(async () => {
     var timeDiff = ((new Date(stopTime)) - (new Date(Date.now()))) / 1000;
     if (timeDiff <= 0) {
-      clear([id]);
+      clearLoc();
       publisher(key, "00:00:00");
     } else {
       publisher(key, convert(timeDiff));
     }
     count++;
   }, 1000);
+  const clearLoc = () => {
+    clear([id]);
+  }
+  return id;
 }
 
 var convert = (seconds) => {
