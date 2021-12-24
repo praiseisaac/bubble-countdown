@@ -16,7 +16,7 @@ const clear = ids => {
     return;
   }
   ids.map(id => {
-    clearInterval(id);
+    clearInterval(timeouts[id]);
   });
 }
 
