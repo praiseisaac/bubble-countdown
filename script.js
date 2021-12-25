@@ -1,15 +1,5 @@
 const timeouts = {};
 
-const createCount = (stopTime, publisher, key, id) => {
-  clear(id);
-  return set(stopTime, publisher, key, id);
-}
-
-const startCount = (stopTime, publisher, key, id, timers) => {
-  clear(timers);
-  return set(stopTime, publisher, key, id);
-}
-
 const clear = ids => {
   if (typeof ids === "string") {
     clearInterval(timeouts[ids]);
